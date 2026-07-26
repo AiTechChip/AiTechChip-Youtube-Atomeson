@@ -1,4 +1,4 @@
-name: Daily AI Tech Shorts Pipeline
+Name: Daily AI Tech Shorts Pipeline
 
 on:
   schedule:
@@ -36,7 +36,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install feedparser google-generativeai edge-tts moviepy pillow numpy requests \
+          pip install feedparser google-generativeai edge-tts "moviepy==1.0.3" pillow numpy requests \
             google-api-python-client google-auth-oauthlib google-auth-httplib2
 
       - name: Run the daily batch
