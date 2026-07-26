@@ -54,9 +54,9 @@ jobs:
 
       - name: Persist pipeline state back to the repo
         run: |
-          git config user.name "news-to-video-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git config --global user.name "news-to-video-bot"
+          git config --global user.email "actions@users.noreply.github.com"
+          git pull origin "${GITHUB_REF_NAME}" --rebase || echo "No rebase needed"
           for f in processed_news.txt queued_news.txt pending_youtube_uploads.txt; do
             if [ -f "$f" ]; then
               git add "$f"
@@ -77,4 +77,4 @@ jobs:
           path: output/*.mp4
           if-no-files-found: ignore
           retention-days: 7
-          
+      
