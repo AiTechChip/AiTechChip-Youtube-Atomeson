@@ -1,4 +1,4 @@
-Name: Daily AI Tech Shorts Pipeline
+name: Daily AI Tech Shorts Pipeline
 
 on:
   schedule:
@@ -77,3 +77,4 @@ jobs:
           path: output/*.mp4
           if-no-files-found: ignore
           retention-days: 7
+          
