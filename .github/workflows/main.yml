@@ -2,13 +2,19 @@ name: Daily AI Tech Shorts Pipeline
 
 on:
   schedule:
+    # Times are UTC. 12:00 UTC ≈ 7-8 AM US Eastern (adjust for your own
+    # publishing goals - this just has to run BEFORE your earliest slot
+    # window, e.g. before 8 AM EST/12:00 UTC-ish, so Slot 1 is reachable).
     - cron: '0 11 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
 
+# Prevents two runs from overlapping (e.g. a manual trigger during a
+# scheduled run) and racing on the same state-file commit.
 concurrency:
   group: news-to-video-pipeline
   cancel-in-progress: false
 
+# Required so the final step can push the updated state files back to the repo.
 permissions:
   contents: write
 
@@ -36,7 +42,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install feedparser openai edge-tts "moviepy==1.0.3" pillow numpy requests \
+          pip install feedparser google-generativeai edge-tts moviepy pillow numpy requests \
             google-api-python-client google-auth-oauthlib google-auth-httplib2
 
       - name: Run the daily batch
@@ -48,20 +54,24 @@ jobs:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
-          AUTO_LOOP_INTERVAL_HOURS: "0"
+          AUTO_LOOP_INTERVAL_HOURS: "0"   # one batch this run; GitHub's cron is the scheduler now
         run: |
           python news_to_video_v4.py
 
       - name: Persist pipeline state back to the repo
         run: |
-          git config --global user.name "news-to-video-bot"
-          git config --global user.email "actions@users.noreply.github.com"
-          git pull origin "${GITHUB_REF_NAME}" --rebase || echo "No rebase needed"
+          git config user.name "news-to-video-bot"
+          git config user.email "actions@users.noreply.github.com"
+
+          # Pull first in case a manual run/commit landed since checkout.
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+
           for f in processed_news.txt queued_news.txt pending_youtube_uploads.txt; do
             if [ -f "$f" ]; then
               git add "$f"
             fi
           done
+
           if git diff --cached --quiet; then
             echo "No state changes to commit."
           else
@@ -77,3 +87,4 @@ jobs:
           path: output/*.mp4
           if-no-files-found: ignore
           retention-days: 7
+          
