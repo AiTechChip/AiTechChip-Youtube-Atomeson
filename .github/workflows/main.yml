@@ -56,7 +56,7 @@ jobs:
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           AUTO_LOOP_INTERVAL_HOURS: "0"   # one batch this run; GitHub's cron is the scheduler now
         run: |
-          python news_to_video_v4.py
+          python news_to_video_final.py
 
       - name: Persist pipeline state back to the repo
         run: |
