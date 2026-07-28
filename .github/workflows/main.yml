@@ -50,7 +50,7 @@ jobs:
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           AUTO_LOOP_INTERVAL_HOURS: "0"
         run: |
-          python news_to_video_final.py
+          python news_to_video_v4.py
 
       - name: Persist pipeline state back to the repo
         run: |
@@ -77,4 +77,3 @@ jobs:
           path: output/*.mp4
           if-no-files-found: ignore
           retention-days: 7
-          
