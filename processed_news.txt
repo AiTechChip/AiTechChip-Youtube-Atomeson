@@ -31,3 +31,6 @@ Claude, Codex, and other AI tools credited in today’s Apple security releases 
 Tired of Those Irritating Windows 11 Features? Here’s How to Turn Them Off - CNET
 Galaxy Z Fold 8 Review: A Passport-Size Shape-Shifter for Every Moment - CNET
 Ernst & Young data breach claimed by ShinyHunters extortion gang - BleepingComputer
+Google’s SynthID watermark is hard to break, but it doesn’t solve AI misinformation - Ars Technica
+The next Xbox could play every Xbox game ever made - The Verge
+Samsung bans smart TV apps that share users’ internet connections with strangers - TechCrunch
