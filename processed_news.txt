@@ -89,3 +89,6 @@ Dolby Vision Is On Netflix But You'll Need These Things First - Engadget
 There Are Carrier Pigeon Apps Now Because Pigeon Technology Is Actually Superior - Gizmodo
 MasterCraft Brings CarPlay And Android Auto To Its Pontoon Boats - Engadget
 Amazon Devices Are The Latest Casualties Of The Memory Shortage Price Hikes - Engadget
+UAT-10147 Uses AI to Scale Server Attacks, Deploys SPECTRE With EDR Bypass and Linux Rootkit - The Hacker News
+Samsung reportedly bringing this major redesign back from the dead with Galaxy S27 [Gallery] - 9to5Google
+ChatGPT’s iPhone app gets a handy shortcut to attach recent photos more quickly - 9to5Mac
